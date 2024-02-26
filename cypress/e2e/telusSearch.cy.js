@@ -25,8 +25,6 @@ describe("Test search functionality", () => {
       .eq(1)
       .invoke("val")
       .then((inputVal) => {
-        console.log(inputVal); // Log the input value
-
         cy.get(".css-1rynq56")
           .invoke("text")
           .then((comparisonText) => {
@@ -37,24 +35,16 @@ describe("Test search functionality", () => {
           });
       });
 
-    // check if there are atleast 6 search results for articles
-// cy.get('.styles__ResultContainer-sc-1aohvhp-3.hVNbRb > .styles__ResultInnerContainer-sc-1aohvhp-4.gCwgVm > ul.styles__ListContainer-sc-1aohvhp-6.jaVibZ > li')
-//       .should('have.text')
-//       .and('match', "Articles")
-//       .should('have.length.greaterThan',  5);
+    // check if there are atleast 6 search results for each category articles,
+    // blogs, forums, related info
+    cy.get(".styles__ListContainer-sc-1aohvhp-6.jaVibZ > li").should(
+      "have.length.greaterThan",
+      24,
+    );
 
     cy.get(".styles__ListContainer-sc-1aohvhp-6.jaVibZ > li > a").each(($a) => {
       // For each link, assert that it has an href attribute
       expect($a).to.have.attr("href");
     });
-    //
-
-
-// cy.get('.styles__ResultContainer-sc-1aohvhp-3.hVNbRb > .css-1rynq56')
-//       .should('have.text')
-//       .and('match', "Articles")
-
-
-
   });
 });
